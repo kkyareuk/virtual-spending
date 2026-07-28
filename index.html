@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fee500">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="가상 소비함">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<title>가상 소비함</title>
+<style>
+:root{--bg:#f6f6f8;--card:#fff;--text:#191b20;--muted:#7a7f88;--line:#e7e8ec;--black:#121317;--purple:#7935b5;--red:#e6392f;--blue:#2868f0;--green:#159565}
+*{box-sizing:border-box}body{margin:0;background:#eceef2;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:var(--text)}
+button,input,select{font:inherit}button{border:0;cursor:pointer}.app{width:min(430px,100%);min-height:100dvh;margin:auto;background:var(--bg);padding-bottom:82px;box-shadow:0 0 40px #0002}
+.status{height:29px;background:#fff;display:flex;justify-content:space-between;align-items:center;padding:0 17px;font-size:12px;font-weight:750}
+.top{background:#fff;position:sticky;top:0;z-index:8;border-bottom:1px solid var(--line);padding:13px 16px 12px}.toprow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.brand{font-size:23px;font-weight:950;letter-spacing:-1px}.icons{display:flex;gap:8px}.iconbtn{width:38px;height:38px;border-radius:50%;background:#fff;font-size:20px}
+.search{margin-top:10px;background:#f0f1f4;border-radius:13px;display:flex;align-items:center;padding:0 12px}.search input{width:100%;padding:12px 8px;border:0;outline:0;background:transparent}
+.content{padding:14px}.simtag{font-size:10px;background:#111;color:#fff;border-radius:999px;padding:4px 7px}.notice{background:#17181c;color:#fff;padding:14px;border-radius:17px;margin-bottom:13px}
+.notice b{display:block;font-size:15px}.notice small{color:#cbd0d7}.hero{height:184px;border-radius:24px;padding:20px;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;margin-bottom:16px}
+.delivery .hero{background:linear-gradient(135deg,#18c9c1,#08a5a0)}.commission .hero{background:linear-gradient(135deg,#82b7ff,#7d4de0)}.shopping .hero{background:linear-gradient(135deg,#ff7c45,#e3422f)}
+.hero h2{font-size:28px;margin:0 0 5px}.hero p{margin:0;font-size:13px}.section{margin:20px 0 10px;font-size:20px;font-weight:950}.sectionrow{display:flex;align-items:center;justify-content:space-between}.more{font-size:13px;color:#2868f0;background:transparent}
+.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 8px;margin:10px 0 20px}.cat{text-align:center;background:transparent;font-size:13px}.cat span{width:58px;height:58px;display:grid;place-items:center;background:#fff;border-radius:17px;margin:0 auto 7px;font-size:28px;box-shadow:0 5px 15px #0000000d}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--line);position:relative}.thumb{aspect-ratio:1.05;background:#eceef2 center/cover no-repeat;display:grid;place-items:center;color:#8c929c;font-size:12px}
+.cardbody{padding:11px}.name{font-weight:850;font-size:14px;line-height:1.3}.meta{font-size:11px;color:var(--muted);margin-top:4px}.price{font-size:17px;font-weight:950;margin-top:6px}.discount{color:var(--red);font-size:12px;font-weight:850}.rating{color:#f5a400;font-size:12px;margin-top:4px}
+.rowbtn{display:flex;gap:7px;margin-top:9px}.buy,.wish{padding:9px;border-radius:10px;font-weight:850}.buy{flex:1;background:#111;color:#fff}.wish{width:42px;background:#f0f1f4}
+.manage{display:none;position:absolute;top:7px;right:7px;z-index:2;gap:5px}.editmode .manage{display:flex}.manage button{width:33px;height:33px;border-radius:50%;background:#fff;box-shadow:0 3px 12px #0003}.editbadge{display:none;background:#ffe600;color:#111;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:900}.editmode .editbadge{display:inline-block}
+.empty{padding:35px 20px;text-align:center;background:#fff;border:1px dashed #ccd0d6;border-radius:18px;color:var(--muted)}
+.bottom{position:fixed;bottom:0;z-index:10;width:min(430px,100%);display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-top:1px solid var(--line);padding:7px 4px calc(7px + env(safe-area-inset-bottom))}
+.nav{background:transparent;color:#858a93;font-size:11px;font-weight:800}.nav i{display:block;font-size:21px;font-style:normal}.nav.active{color:#111}
+.fab{display:none;position:fixed;right:max(18px,calc((100vw - 430px)/2 + 18px));bottom:92px;width:58px;height:58px;border-radius:50%;background:#111;color:#fff;font-size:28px;box-shadow:0 10px 24px #0003;z-index:11}.editmode .fab{display:block}
+.sheet,.modal{position:fixed;inset:0;background:#0007;z-index:30;display:none;align-items:flex-end;justify-content:center}.open{display:flex}.panel{width:min(430px,100%);max-height:92dvh;overflow:auto;background:#fff;border-radius:25px 25px 0 0;padding:18px 18px calc(25px + env(safe-area-inset-bottom))}
+.handle{width:44px;height:5px;background:#d4d7dc;border-radius:99px;margin:0 auto 15px}.panel h3{margin:0 0 15px;font-size:22px}.field{margin-bottom:12px}.field label{display:block;font-size:12px;font-weight:850;margin-bottom:6px}.field input,.field select{width:100%;padding:12px;border:1px solid #dfe2e7;border-radius:12px}
+.primary,.secondary{width:100%;padding:14px;border-radius:13px;font-weight:900}.primary{background:#111;color:#fff}.secondary{background:#eff0f3;color:#111}.danger{color:#c72d2d}.flex{display:flex;gap:8px}
+.gallery{height:250px;background:#eceef2 center/cover no-repeat;border-radius:15px;margin-bottom:12px}.detailtitle{font-size:25px;font-weight:950}.detaildesc{color:#666;line-height:1.6;font-size:14px;margin:12px 0}.seller{background:#f6f6f8;border-radius:14px;padding:14px;margin:14px 0}.apply{background:var(--purple)}
+.reasonlist{display:grid;grid-template-columns:1fr 1fr;gap:9px}.reason{padding:13px;border-radius:12px;background:#f0f1f4;font-weight:800}.reason.selected{outline:2px solid #111;background:#fff}
+.paybox{background:#f4f5f7;border-radius:16px;padding:14px;margin:12px 0}.total{display:flex;justify-content:space-between;font-size:19px;font-weight:950}
+.pay-kakao{background:#fee500;color:#191919;border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 8px 22px rgba(0,0,0,.08)}
+.pay-kakao .kp-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.pay-kakao .kp-logo{font-size:23px;font-weight:950;letter-spacing:-1px}
+.pay-kakao .kp-badge{font-size:10px;font-weight:900;background:#191919;color:#fee500;padding:5px 7px;border-radius:999px}
+.pay-kakao .kp-sub{font-size:12px;margin-top:5px;opacity:.72}
+.pay-kakao .kp-card{background:rgba(255,255,255,.48);border-radius:14px;padding:14px;margin-top:14px}
+.pay-kakao .kp-card b{display:block;font-size:13px;margin-bottom:5px}
+.pay-kakao .kp-card span{font-size:12px;opacity:.75}
+.backrow{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.backbtn{width:38px;height:38px;border-radius:50%;background:#f0f1f4;font-size:22px;font-weight:900}
+.backrow h3{margin:0!important}
+.kp-primary{background:#fee500!important;color:#191919!important}
+.kp-pin{background:#fee500;margin:-18px -18px 18px;padding:18px 18px 22px;border-radius:25px 25px 0 0}
+.kp-pin .backbtn{background:rgba(255,255,255,.52)}
+.kp-pin p{margin:6px 0 0;font-size:12px;opacity:.72}
+.kp-key{background:#fff!important;border:1px solid #ececec}
+.kp-success{background:#fee500;border-radius:18px;padding:18px;margin-bottom:18px}.dots{display:flex;justify-content:center;gap:12px;margin:22px}.dot{width:13px;height:13px;border-radius:50%;background:#d7dae0}.dot.on{background:#111}.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.key{padding:17px;border-radius:13px;background:#f1f2f5;font-size:20px;font-weight:850}
+.sensor{width:150px;height:150px;margin:18px auto;border-radius:50%;background:radial-gradient(circle,#fff 0 22%,#e6e8ed 23% 29%,#fff 30% 35%,#dfe2e8 36% 42%,#fff 43% 48%,#d5d9e1 49% 54%,#fff 55%);display:grid;place-items:center;user-select:none;touch-action:none;border:1px solid #e0e2e7}.progress{height:7px;background:#eceef2;border-radius:99px;overflow:hidden}.progress span{display:block;width:0;height:100%;background:#111}
+.success{text-align:center;padding:28px 4px}.check{width:82px;height:82px;border-radius:50%;background:#111;color:#fff;display:grid;place-items:center;font-size:42px;margin:0 auto 16px}.saved{font-size:24px;color:var(--green);font-weight:950}
+.histitem{background:#f5f6f8;border-radius:14px;padding:13px;margin:8px 0}.histtop{display:flex;justify-content:space-between;gap:8px}.histtop button{background:transparent;color:#c72d2d;font-size:12px;font-weight:850}
+.statbar{height:9px;background:#eceef2;border-radius:99px;overflow:hidden;margin-top:6px}.statbar span{display:block;height:100%;background:#111}.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="app delivery" id="app">
+ <div class="status"><span id="clock">2:29</span><span>가상 소비 · 실제 결제 없음</span></div>
+ <header class="top">
+  <div class="toprow"><div><span class="brand" id="brand">한입배달</span> <span class="simtag">SIM</span></div>
+   <div class="icons"><span class="editbadge">편집모드</span><button class="iconbtn" id="menuBtn">⋮</button></div>
+  </div>
+  <div class="search"><span>⌕</span><input id="search" placeholder="검색"></div>
+ </header>
+ <main class="content">
+  <div class="notice"><b>사도 되는 기분만, 돈은 그대로.</b><small>이 앱은 실제 주문·결제·배송을 하지 않습니다.</small></div>
+  <section class="hero"><h2 id="heroTitle">오늘 뭐 먹지?</h2><p id="heroSub">끝까지 고르고 가상으로 결제하세요.</p></section>
+  <div id="categoryArea"></div>
+  <div id="results"></div>
+ </main>
+ <button class="fab" id="addBtn">＋</button>
+ <nav class="bottom">
+  <button class="nav active" data-mode="delivery"><i>🍜</i>배달</button>
+  <button class="nav" data-mode="commission"><i>🎨</i>커미션</button>
+  <button class="nav" data-mode="shopping"><i>📦</i>쇼핑</button>
+  <button class="nav" id="recordsBtn"><i>💰</i>기록</button>
+ </nav>
+</div>
+
+<div class="sheet" id="menuSheet"><div class="panel"><div class="handle"></div><h3>메뉴</h3>
+ <button class="primary" id="toggleEdit">편집모드 켜기</button>
+ <button class="secondary" id="wishlistBtn" style="margin-top:8px">위시리스트</button>
+ <button class="secondary" id="statsBtn" style="margin-top:8px">충동 원인 통계</button>
+ <button class="secondary" id="installBtn" style="margin-top:8px">홈 화면에 앱 설치</button>
+ <button class="secondary" id="closeMenu" style="margin-top:8px">닫기</button>
+</div></div>
+
+<div class="sheet" id="formSheet"><div class="panel"><div class="handle"></div><h3 id="formTitle">항목 추가</h3>
+ <div class="field"><label>이름</label><input id="itemName"></div>
+ <div class="field"><label>가격</label><input id="itemPrice" type="number" inputmode="numeric"></div>
+ <div class="field"><label>카테고리</label><select id="itemCategory"></select></div>
+ <div class="field"><label>설명</label><input id="itemDesc" placeholder="상품 또는 커미션 설명"></div>
+ <div class="field"><label>사진</label><input id="itemImage" type="file" accept="image/*"></div>
+ <div class="flex"><button class="secondary" id="cancelForm">취소</button><button class="primary" id="saveItem">저장</button></div>
+ <button class="secondary danger hidden" id="deleteItem" style="margin-top:8px">이 항목 삭제</button>
+</div></div>
+
+<div class="modal" id="detailModal"><div class="panel"><div class="handle"></div>
+ <div class="backrow"><button class="backbtn" id="backDetail">‹</button><h3>상세 보기</h3></div>
+ <div class="gallery" id="detailImage"></div><div class="detailtitle" id="detailName"></div>
+ <div class="price" id="detailPrice"></div><div class="detaildesc" id="detailDesc"></div>
+ <div class="seller" id="sellerBox"></div>
+ <div class="flex"><button class="secondary" id="detailWish">♡ 위시</button><button class="primary" id="detailBuy">신청하기</button></div>
+ <button class="secondary" id="closeDetail" style="margin-top:8px">닫기</button>
+</div></div>
+
+<div class="modal" id="reasonModal"><div class="panel"><div class="handle"></div><div class="backrow"><button class="backbtn" id="backReason">‹</button><h3>왜 사고 싶나요?</h3></div>
+ <div class="reasonlist" id="reasonList"></div><button class="primary" id="reasonNext" style="margin-top:14px">결제 계속하기</button>
+</div></div>
+
+<div class="modal" id="payModal"><div class="panel">
+ <section id="payOrder"><div class="handle"></div>
+  <div class="backrow"><button class="backbtn" id="backPayOrder">‹</button><h3>주문 확인</h3></div>
+  <div class="paybox"><b>받는 위치</b><div style="margin-top:5px">우리 집<br><small style="color:#777">저장된 주소 · 상세주소 비공개</small></div></div>
+  <div class="pay-kakao">
+   <div class="kp-top"><div class="kp-logo">kakao pay</div><span class="kp-badge">SIMULATION</span></div>
+   <div class="kp-sub">개인용 가상 결제 · 실제 출금 없음</div>
+   <div class="kp-card"><b>카카오페이머니</b><span>결제 가능 · 가상 잔액</span></div>
+  </div>
+  <div class="total"><span>총 결제금액</span><span id="payTotal">0원</span></div>
+  <button class="primary kp-primary" id="startPay" style="margin-top:16px">카카오페이로 결제</button>
+ </section>
+ <section id="pinStep" class="hidden">
+  <div class="kp-pin"><div class="backrow"><button class="backbtn" id="backPin">‹</button><h3>카카오페이</h3></div><p>결제 비밀번호 6자리를 입력하세요 · 저장되지 않음</p></div>
+  <div class="dots" id="dots"></div><div class="keypad" id="keypad"></div>
+ </section>
+ <section id="fingerStep" class="hidden">
+  <div class="kp-pin"><div class="backrow"><button class="backbtn" id="backFinger">‹</button><h3>카카오페이</h3></div><p>본인 확인을 완료해주세요.</p></div>
+  <p style="text-align:center;color:#777">원을 1.5초 동안 길게 누르세요.</p><div class="sensor" id="sensor">손가락 올리기</div><div class="progress"><span id="fingerProgress"></span></div>
+ </section>
+ <section id="successStep" class="hidden success">
+  <div class="kp-success"><div style="font-weight:950;font-size:22px">kakao pay</div><div style="font-size:12px;margin-top:4px">가상 결제 완료</div></div>
+  <div class="check">✓</div><h3>결제가 완료되었습니다</h3><div class="saved" id="savedAmount"></div><p style="color:#777">실제 결제는 발생하지 않았습니다.</p><button class="primary kp-primary" id="donePay">확인</button>
+ </section>
+</div></div>
+
+<div class="modal" id="recordsModal"><div class="panel"><div class="handle"></div><div class="backrow"><button class="backbtn" id="backRecords">‹</button><h3>절약 기록</h3></div><div class="sectionrow"><div></div><button class="more" id="clearHistory">전체 삭제</button></div><div class="notice"><b id="totalSaved">누적 0원</b><small id="recordCount">가상 결제 0회</small></div><div id="recordList"></div><button class="secondary" id="closeRecords">닫기</button></div></div>
+<div class="modal" id="wishlistModal"><div class="panel"><div class="handle"></div><h3>위시리스트</h3><div id="wishlistList"></div><button class="secondary" id="closeWishlist">닫기</button></div></div>
+<div class="modal" id="statsModal"><div class="panel"><div class="handle"></div><h3>충동 원인 통계</h3><div id="statsList"></div><button class="secondary" id="closeStats">닫기</button></div></div>
+
+<script>
+const modes={
+ delivery:{brand:'한입배달',hero:'오늘 뭐 먹지?',sub:'끝까지 고르고 가상으로 결제하세요.',cats:[['🍗','치킨'],['🍕','피자'],['🌶️','마라탕'],['🍰','디저트'],['🍜','한식'],['🍔','패스트푸드'],['☕','카페'],['🥗','건강식']]},
+ commission:{brand:'캔버스마켓',hero:'상상을 의뢰해 보세요',sub:'작품을 고르고 신청하는 기분까지.',cats:[['✒️','글'],['🎨','그림'],['🧸','수공예'],['✒️','디자인'],['🔮','점술'],['🎵','사운드'],['💡','기타'],['🎩','구해요']]},
+ shopping:{brand:'당장마켓',hero:'사고 싶은 건 모두 담기',sub:'배송 대신 절약 기록이 도착합니다.',cats:[['💄','뷰티'],['👗','패션'],['🏠','생활'],['💻','디지털'],['✈️','여행'],['🍽️','식품'],['🎁','취미'],['🔥','특가']]}
+};
+let mode='delivery',editing=false,editingIndex=null,currentItem=null,selectedReason='';
+let items=JSON.parse(localStorage.getItem('vs_items')||'{}');
+let history=JSON.parse(localStorage.getItem('vs_history')||'[]');
+let wishlist=JSON.parse(localStorage.getItem('vs_wishlist')||'[]');
+const reasons=['스트레스','심심함','진짜 필요','할인해서','그냥 갖고 싶음','기분 전환'];
+function money(n){return Number(n||0).toLocaleString('ko-KR')+'원'}
+function saveAll(){localStorage.setItem('vs_items',JSON.stringify(items));localStorage.setItem('vs_history',JSON.stringify(history));localStorage.setItem('vs_wishlist',JSON.stringify(wishlist))}
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function defaults(){
+ if(Object.keys(items).length)return;
+ items={
+  delivery:[{name:'얼얼한 마라탕',price:18900,category:'마라탕',desc:'맵기와 재료를 고르는 가상 메뉴입니다.',image:''},{name:'초코 크레이프 케이크',price:7900,category:'디저트',desc:'달콤한 디저트 한 조각.',image:''}],
+  commission:[{name:'캐릭터 반신 일러스트',price:50000,category:'그림',desc:'캐릭터 1인 반신 컬러 일러스트.',image:''},{name:'맞춤 메탈 키링',price:20000,category:'수공예',desc:'사진과 장식을 조합한 맞춤 키링 제작.',image:''},{name:'단편 소설 커미션',price:35000,category:'글',desc:'원하는 캐릭터와 분위기로 단편을 작성합니다.',image:''}],
+  shopping:[{name:'물 타입 매니큐어',price:5820,category:'뷰티',desc:'반짝이는 탑코트. 가상 특가 상품.',image:''},{name:'대용량 접이식 수납함',price:61650,category:'생활',desc:'옷과 소품을 정리하는 대형 수납함.',image:''},{name:'무선 미니 청소기',price:39900,category:'디지털',desc:'책상과 자동차용 무선 청소기.',image:''}]
+ };saveAll()
+}
+defaults();
+const app=document.getElementById('app');
+function setMode(m){mode=m;app.className='app '+m+(editing?' editmode':'');document.getElementById('brand').textContent=modes[m].brand;document.getElementById('heroTitle').textContent=modes[m].hero;document.getElementById('heroSub').textContent=modes[m].sub;document.querySelectorAll('.nav[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));renderCategories();renderItems()}
+function renderCategories(){document.getElementById('categoryArea').innerHTML='<div class="section">카테고리</div><div class="categories">'+modes[mode].cats.map(c=>`<button class="cat" onclick="filterCat('${c[1]}')"><span>${c[0]}</span>${c[1]}</button>`).join('')+'</div>'}
+function renderItems(filter=''){const q=(document.getElementById('search').value||'').toLowerCase();const src=(items[mode]||[]).map((x,i)=>({...x,_i:i})).filter(x=>(!filter||x.category===filter)&&(!q||x.name.toLowerCase().includes(q)));const r=document.getElementById('results');r.innerHTML='<div class="sectionrow"><div class="section">'+(mode==='commission'?'숨은 맛집 리스트':mode==='shopping'?'인기 상품':'추천 메뉴')+'</div><button class="more">더보기 ›</button></div>'+(src.length?'<div class="cards">'+src.map(x=>`<article class="card"><div class="manage"><button onclick="event.stopPropagation();editItem(${x._i})">✎</button><button onclick="event.stopPropagation();removeItem(${x._i})">×</button></div><div onclick="openDetail(${x._i})"><div class="thumb" style="${x.image?`background-image:url(${x.image})`:''}">${x.image?'':'사진 추가 가능'}</div><div class="cardbody"><div class="discount">${mode==='shopping'?'가상 특가':''}</div><div class="name">${esc(x.name)}</div><div class="meta">${esc(x.category)} · 실제 판매 아님</div><div class="price">${money(x.price)}${mode==='commission'?' ~':''}</div><div class="rating">★★★★★ <span style="color:#999">(가상 후기)</span></div></div></div></article>`).join('')+'</div>':'<div class="empty">등록된 항목이 없습니다.</div>')}
+window.filterCat=c=>renderItems(c);document.getElementById('search').oninput=()=>renderItems();
+document.querySelectorAll('.nav[data-mode]').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
+const menuSheet=document.getElementById('menuSheet');document.getElementById('menuBtn').onclick=()=>menuSheet.classList.add('open');document.getElementById('closeMenu').onclick=()=>menuSheet.classList.remove('open');
+document.getElementById('toggleEdit').onclick=()=>{editing=!editing;app.classList.toggle('editmode',editing);document.getElementById('toggleEdit').textContent=editing?'편집모드 끝내기':'편집모드 켜기';menuSheet.classList.remove('open')};
+const formSheet=document.getElementById('formSheet');
+function fillCategories(){document.getElementById('itemCategory').innerHTML=modes[mode].cats.map(c=>`<option>${c[1]}</option>`).join('')}
+document.getElementById('addBtn').onclick=()=>{editingIndex=null;fillCategories();document.getElementById('formTitle').textContent='항목 추가';document.getElementById('itemName').value='';document.getElementById('itemPrice').value='';document.getElementById('itemDesc').value='';document.getElementById('itemImage').value='';document.getElementById('deleteItem').classList.add('hidden');formSheet.classList.add('open')};
+document.getElementById('cancelForm').onclick=()=>formSheet.classList.remove('open');
+window.editItem=i=>{editingIndex=i;fillCategories();const x=items[mode][i];document.getElementById('formTitle').textContent='항목 편집';document.getElementById('itemName').value=x.name;document.getElementById('itemPrice').value=x.price;document.getElementById('itemCategory').value=x.category;document.getElementById('itemDesc').value=x.desc||'';document.getElementById('deleteItem').classList.remove('hidden');formSheet.classList.add('open')};
+window.removeItem=i=>{if(confirm('삭제할까요?')){items[mode].splice(i,1);saveAll();renderItems()}};
+document.getElementById('deleteItem').onclick=()=>{if(editingIndex!==null&&confirm('삭제할까요?')){items[mode].splice(editingIndex,1);saveAll();formSheet.classList.remove('open');renderItems()}};
+document.getElementById('saveItem').onclick=()=>{const name=document.getElementById('itemName').value.trim(),price=+document.getElementById('itemPrice').value,category=document.getElementById('itemCategory').value,desc=document.getElementById('itemDesc').value.trim(),file=document.getElementById('itemImage').files[0];if(!name||!price)return alert('이름과 가격을 입력하세요.');const done=image=>{items[mode]=items[mode]||[];if(editingIndex===null)items[mode].unshift({name,price,category,desc,image});else items[mode][editingIndex]={name,price,category,desc,image:image||items[mode][editingIndex].image||''};saveAll();formSheet.classList.remove('open');renderItems()};if(file){const fr=new FileReader();fr.onload=()=>done(fr.result);fr.readAsDataURL(file)}else done(editingIndex===null?'':items[mode][editingIndex].image)};
+const detailModal=document.getElementById('detailModal');
+window.openDetail=i=>{currentItem={...items[mode][i],mode,index:i};document.getElementById('detailImage').style.backgroundImage=currentItem.image?`url(${currentItem.image})`:'';document.getElementById('detailName').textContent=currentItem.name;document.getElementById('detailPrice').textContent=money(currentItem.price)+(mode==='commission'?' ~':'');document.getElementById('detailDesc').textContent=currentItem.desc||'상세 설명이 없습니다.';document.getElementById('sellerBox').innerHTML=mode==='commission'?'<b>작가 정보</b><br><small>가상 작가 · 신청 가능</small>':'<b>상품 정보</b><br><small>가상 상품 · 실제 배송 없음</small>';document.getElementById('detailBuy').textContent=mode==='commission'?'신청하기':mode==='delivery'?'주문하기':'구매하기';detailModal.classList.add('open')};
+document.getElementById('closeDetail').onclick=()=>detailModal.classList.remove('open');
+document.getElementById('backDetail').onclick=()=>detailModal.classList.remove('open');
+document.getElementById('detailWish').onclick=()=>{if(!currentItem)return;wishlist.unshift({...currentItem,added:new Date().toLocaleDateString('ko-KR')});saveAll();alert('위시리스트에 보관했습니다.')};
+document.getElementById('detailBuy').onclick=()=>{detailModal.classList.remove('open');selectedReason='';document.getElementById('reasonList').innerHTML=reasons.map(r=>`<button class="reason" onclick="pickReason(this,'${r}')">${r}</button>`).join('');document.getElementById('reasonModal').classList.add('open')};
+window.pickReason=(el,r)=>{selectedReason=r;document.querySelectorAll('.reason').forEach(x=>x.classList.remove('selected'));el.classList.add('selected')};
+document.getElementById('backReason').onclick=()=>{document.getElementById('reasonModal').classList.remove('open');detailModal.classList.add('open')};
+document.getElementById('reasonNext').onclick=()=>{if(!selectedReason)return alert('이유를 하나 선택하세요.');document.getElementById('reasonModal').classList.remove('open');document.getElementById('payTotal').textContent=money(currentItem.price);showPay('payOrder');document.getElementById('payModal').classList.add('open')};
+function showPay(id){['payOrder','pinStep','fingerStep','successStep'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id))}
+document.getElementById('backPayOrder').onclick=()=>{document.getElementById('payModal').classList.remove('open');document.getElementById('reasonModal').classList.add('open')};
+document.getElementById('backPin').onclick=()=>showPay('payOrder');
+document.getElementById('backFinger').onclick=()=>{pin='';document.querySelectorAll('.dot').forEach(d=>d.classList.remove('on'));cancelHold();showPay('pinStep')};
+let pin='';document.getElementById('dots').innerHTML='<i class="dot"></i>'.repeat(6);const keypad=document.getElementById('keypad');[1,2,3,4,5,6,7,8,9,'',0,'⌫'].forEach(k=>{const b=document.createElement('button');b.className='key kp-key';b.textContent=k;if(k==='')b.style.visibility='hidden';b.onclick=()=>{if(k==='⌫')pin=pin.slice(0,-1);else if(pin.length<6)pin+=k;[...document.querySelectorAll('.dot')].forEach((d,i)=>d.classList.toggle('on',i<pin.length));if(navigator.vibrate)navigator.vibrate(10);if(pin.length===6)setTimeout(()=>showPay('fingerStep'),180)};keypad.appendChild(b)});
+document.getElementById('startPay').onclick=()=>{pin='';document.querySelectorAll('.dot').forEach(d=>d.classList.remove('on'));showPay('pinStep')};
+let raf,start;const sensor=document.getElementById('sensor'),prog=document.getElementById('fingerProgress');function cancelHold(){cancelAnimationFrame(raf);prog.style.width='0';sensor.textContent='손가락 올리기'}sensor.onpointerdown=e=>{e.preventDefault();start=performance.now();sensor.textContent='계속 누르기';const tick=t=>{let p=Math.min(100,(t-start)/1500*100);prog.style.width=p+'%';if(p<100)raf=requestAnimationFrame(tick);else completePay()};raf=requestAnimationFrame(tick)};sensor.onpointerup=cancelHold;sensor.onpointerleave=e=>{if(e.buttons)cancelHold()};
+function completePay(){history.unshift({name:currentItem.name,amount:currentItem.price,reason:selectedReason,time:new Date().toLocaleString('ko-KR')});saveAll();document.getElementById('savedAmount').textContent=money(currentItem.price)+' 절약';if(navigator.vibrate)navigator.vibrate([70,45,120]);showPay('successStep')}
+document.getElementById('donePay').onclick=()=>{document.getElementById('payModal').classList.remove('open');showPay('payOrder')};
+function renderHistory(){const total=history.reduce((a,b)=>a+b.amount,0);document.getElementById('totalSaved').textContent='누적 '+money(total);document.getElementById('recordCount').textContent='가상 결제 '+history.length+'회';document.getElementById('recordList').innerHTML=history.length?history.map((h,i)=>`<div class="histitem"><div class="histtop"><div><b>${esc(h.name)}</b><div class="meta">${h.time} · ${esc(h.reason)}</div><div class="price">${money(h.amount)} 절약</div></div><button onclick="removeHistory(${i})">삭제</button></div></div>`).join(''):'<div class="empty">기록이 없습니다.</div>'}
+window.removeHistory=i=>{if(confirm('이 기록을 삭제할까요?')){history.splice(i,1);saveAll();renderHistory()}};document.getElementById('recordsBtn').onclick=()=>{renderHistory();document.getElementById('recordsModal').classList.add('open')};document.getElementById('closeRecords').onclick=()=>document.getElementById('recordsModal').classList.remove('open');
+document.getElementById('backRecords').onclick=()=>document.getElementById('recordsModal').classList.remove('open');document.getElementById('clearHistory').onclick=()=>{if(history.length&&confirm('전부 삭제할까요?')){history=[];saveAll();renderHistory()}};
+function renderWishlist(){document.getElementById('wishlistList').innerHTML=wishlist.length?wishlist.map((w,i)=>`<div class="histitem"><div class="histtop"><div><b>${esc(w.name)}</b><div class="meta">${esc(w.category)} · ${w.added}</div><div class="price">${money(w.price)}</div></div><button onclick="removeWish(${i})">삭제</button></div></div>`).join(''):'<div class="empty">보관한 항목이 없습니다.</div>'}
+window.removeWish=i=>{wishlist.splice(i,1);saveAll();renderWishlist()};document.getElementById('wishlistBtn').onclick=()=>{menuSheet.classList.remove('open');renderWishlist();document.getElementById('wishlistModal').classList.add('open')};document.getElementById('closeWishlist').onclick=()=>document.getElementById('wishlistModal').classList.remove('open');
+function renderStats(){const counts={};history.forEach(h=>counts[h.reason]=(counts[h.reason]||0)+1);const max=Math.max(1,...Object.values(counts));document.getElementById('statsList').innerHTML=Object.keys(counts).length?Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([r,n])=>`<div class="histitem"><b>${esc(r)} · ${n}회</b><div class="statbar"><span style="width:${n/max*100}%"></span></div></div>`).join(''):'<div class="empty">아직 통계를 낼 기록이 없습니다.</div>'}
+document.getElementById('statsBtn').onclick=()=>{menuSheet.classList.remove('open');renderStats();document.getElementById('statsModal').classList.add('open')};document.getElementById('closeStats').onclick=()=>document.getElementById('statsModal').classList.remove('open');
+
+function closeTopLayer(){
+ const pay=document.getElementById('payModal');
+ if(pay.classList.contains('open')){
+   if(!document.getElementById('successStep').classList.contains('hidden')) return false;
+   if(!document.getElementById('fingerStep').classList.contains('hidden')){document.getElementById('backFinger').click();return true}
+   if(!document.getElementById('pinStep').classList.contains('hidden')){document.getElementById('backPin').click();return true}
+   document.getElementById('backPayOrder').click();return true;
+ }
+ const order=['reasonModal','detailModal','recordsModal','wishlistModal','statsModal','formSheet','menuSheet'];
+ for(const id of order){const el=document.getElementById(id);if(el.classList.contains('open')){el.classList.remove('open');return true}}
+ return false;
+}
+window.addEventListener('popstate',()=>{if(closeTopLayer())history.pushState({sim:true},'')});
+history.replaceState({sim:true},'');history.pushState({sim:true},'');
+
+let deferredInstallPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();
+  deferredInstallPrompt=e;
+  document.getElementById('installBtn').textContent='홈 화면에 앱 설치';
+});
+document.getElementById('installBtn').onclick=async()=>{
+  if(deferredInstallPrompt){
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt=null;
+    menuSheet.classList.remove('open');
+    return;
+  }
+  alert('브라우저 메뉴에서 “홈 화면에 추가” 또는 “앱 설치”를 선택해주세요.\n\n삼성 인터넷/Chrome: 오른쪽 위 ⋮ → 홈 화면에 추가');
+};
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+setInterval(()=>document.getElementById('clock').textContent=new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'}),1000);setMode('delivery');
+</script>
+</body></html>
