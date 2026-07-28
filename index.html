@@ -22,6 +22,32 @@ button,input,select{font:inherit}button{border:0;cursor:pointer}.app{width:min(4
 .content{padding:14px}.simtag{font-size:10px;background:#111;color:#fff;border-radius:999px;padding:4px 7px}.notice{background:#17181c;color:#fff;padding:14px;border-radius:17px;margin-bottom:13px}
 .notice b{display:block;font-size:15px}.notice small{color:#cbd0d7}.hero{height:184px;border-radius:24px;padding:20px;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;margin-bottom:16px}
 .delivery .hero{background:linear-gradient(135deg,#18c9c1,#08a5a0)}.commission .hero{background:linear-gradient(135deg,#82b7ff,#7d4de0)}.shopping .hero{background:linear-gradient(135deg,#ff7c45,#e3422f)}
+.steam{background:#0b1722;color:#dce7f1}
+.steam .status,.steam .top,.steam .bottom{background:#171d25;color:#dce7f1;border-color:#293644}
+.steam .top{box-shadow:0 4px 14px #0005}
+.steam .brand{color:#dce7f1}
+.steam .iconbtn{background:#171d25;color:#dce7f1}
+.steam .search{background:#252d38}
+.steam .search input{color:#eef5fb}
+.steam .search input::placeholder{color:#8c98a5}
+.steam .notice{background:#101820;border:1px solid #26384a}
+.steam .hero{background:linear-gradient(135deg,#1b2838,#2a475e 55%,#66c0f4);color:#fff}
+.steam .section{color:#f1f5f8}
+.steam .more{color:#66c0f4}
+.steam .card{background:#162534;border-color:#294158;box-shadow:0 8px 22px #0004}
+.steam .thumb{background-color:#203247;color:#91a4b6}
+.steam .name{color:#edf4fa}
+.steam .meta{color:#8fa4b5}
+.steam .price{color:#fff}
+.steam .discount{display:inline-block;background:#75b022;color:#101820;padding:3px 6px;border-radius:2px}
+.steam .rating{color:#66c0f4}
+.steam .buy{background:#75b022;color:#10210b}
+.steam .wish{background:#26394c;color:#dce7f1}
+.steam .nav{color:#9aa7b3}
+.steam .nav.active{color:#66c0f4}
+.steam .empty{background:#162534;border-color:#355069;color:#91a4b6}
+.steam .fab{background:#66c0f4;color:#10202d}
+
 .hero h2{font-size:28px;margin:0 0 5px}.hero p{margin:0;font-size:13px}.section{margin:20px 0 10px;font-size:20px;font-weight:950}.sectionrow{display:flex;align-items:center;justify-content:space-between}.more{font-size:13px;color:#2868f0;background:transparent}
 .categories{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 8px;margin:10px 0 20px}.cat{text-align:center;background:transparent;font-size:13px}.cat span{width:58px;height:58px;display:grid;place-items:center;background:#fff;border-radius:17px;margin:0 auto 7px;font-size:28px;box-shadow:0 5px 15px #0000000d}
 .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--line);position:relative}.thumb{aspect-ratio:1.05;background:#eceef2 center/cover no-repeat;display:grid;place-items:center;color:#8c929c;font-size:12px}
@@ -29,9 +55,9 @@ button,input,select{font:inherit}button{border:0;cursor:pointer}.app{width:min(4
 .rowbtn{display:flex;gap:7px;margin-top:9px}.buy,.wish{padding:9px;border-radius:10px;font-weight:850}.buy{flex:1;background:#111;color:#fff}.wish{width:42px;background:#f0f1f4}
 .manage{display:none;position:absolute;top:7px;right:7px;z-index:2;gap:5px}.editmode .manage{display:flex}.manage button{width:33px;height:33px;border-radius:50%;background:#fff;box-shadow:0 3px 12px #0003}.editbadge{display:none;background:#ffe600;color:#111;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:900}.editmode .editbadge{display:inline-block}
 .empty{padding:35px 20px;text-align:center;background:#fff;border:1px dashed #ccd0d6;border-radius:18px;color:var(--muted)}
-.bottom{position:fixed;bottom:0;z-index:10;width:min(430px,100%);display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-top:1px solid var(--line);padding:7px 4px calc(7px + env(safe-area-inset-bottom))}
+.bottom{position:fixed;bottom:0;z-index:10;width:min(430px,100%);display:grid;grid-template-columns:repeat(5,1fr);background:#fff;border-top:1px solid var(--line);padding:7px 4px calc(7px + env(safe-area-inset-bottom))}
 .nav{background:transparent;color:#858a93;font-size:11px;font-weight:800}.nav i{display:block;font-size:21px;font-style:normal}.nav.active{color:#111}
-.fab{display:none;position:fixed;right:max(18px,calc((100vw - 430px)/2 + 18px));bottom:92px;width:58px;height:58px;border-radius:50%;background:#111;color:#fff;font-size:28px;box-shadow:0 10px 24px #0003;z-index:11}.editmode .fab{display:block}
+.fab{display:block;position:fixed;right:max(18px,calc((100vw - 430px)/2 + 18px));bottom:92px;width:58px;height:58px;border-radius:50%;background:#111;color:#fff;font-size:28px;box-shadow:0 10px 24px #0003;z-index:11}
 .sheet,.modal{position:fixed;inset:0;background:#0007;z-index:30;display:none;align-items:flex-end;justify-content:center}.open{display:flex}.panel{width:min(430px,100%);max-height:92dvh;overflow:auto;background:#fff;border-radius:25px 25px 0 0;padding:18px 18px calc(25px + env(safe-area-inset-bottom))}
 .handle{width:44px;height:5px;background:#d4d7dc;border-radius:99px;margin:0 auto 15px}.panel h3{margin:0 0 15px;font-size:22px}.field{margin-bottom:12px}.field label{display:block;font-size:12px;font-weight:850;margin-bottom:6px}.field input,.field select{width:100%;padding:12px;border:1px solid #dfe2e7;border-radius:12px}
 .primary,.secondary{width:100%;padding:14px;border-radius:13px;font-weight:900}.primary{background:#111;color:#fff}.secondary{background:#eff0f3;color:#111}.danger{color:#c72d2d}.flex{display:flex;gap:8px}
@@ -81,6 +107,7 @@ button,input,select{font:inherit}button{border:0;cursor:pointer}.app{width:min(4
   <button class="nav active" data-mode="delivery"><i>🍜</i>배달</button>
   <button class="nav" data-mode="commission"><i>🎨</i>커미션</button>
   <button class="nav" data-mode="shopping"><i>📦</i>쇼핑</button>
+  <button class="nav" data-mode="steam"><i>🎮</i>게임</button>
   <button class="nav" id="recordsBtn"><i>💰</i>기록</button>
  </nav>
 </div>
@@ -148,9 +175,10 @@ button,input,select{font:inherit}button{border:0;cursor:pointer}.app{width:min(4
 
 <script>
 const modes={
- delivery:{brand:'한입배달',hero:'오늘 뭐 먹지?',sub:'끝까지 고르고 가상으로 결제하세요.',cats:[['🍗','치킨'],['🍕','피자'],['🌶️','마라탕'],['🍰','디저트'],['🍜','한식'],['🍔','패스트푸드'],['☕','카페'],['🥗','건강식']]},
+ delivery:{brand:'한입배달',hero:'오늘 뭐 먹지?',sub:'끝까지 고르고 가상으로 결제하세요.',cats:[]},
  commission:{brand:'캔버스마켓',hero:'상상을 의뢰해 보세요',sub:'작품을 고르고 신청하는 기분까지.',cats:[['✒️','글'],['🎨','그림'],['🧸','수공예'],['✒️','디자인'],['🔮','점술'],['🎵','사운드'],['💡','기타'],['🎩','구해요']]},
- shopping:{brand:'당장마켓',hero:'사고 싶은 건 모두 담기',sub:'배송 대신 절약 기록이 도착합니다.',cats:[['💄','뷰티'],['👗','패션'],['🏠','생활'],['💻','디지털'],['✈️','여행'],['🍽️','식품'],['🎁','취미'],['🔥','특가']]}
+ shopping:{brand:'당장마켓',hero:'사고 싶은 건 모두 담기',sub:'배송 대신 절약 기록이 도착합니다.',cats:[]},
+ steam:{brand:'GAME VAULT',hero:'게임을 사는 기분만',sub:'할인 게임과 DLC를 담고 실제 돈은 지키세요.',cats:[]}
 };
 let mode='delivery',editing=false,editingIndex=null,currentItem=null,selectedReason='';
 let items=JSON.parse(localStorage.getItem('vs_items')||'{}');
@@ -165,28 +193,51 @@ function defaults(){
  items={
   delivery:[{name:'얼얼한 마라탕',price:18900,category:'마라탕',desc:'맵기와 재료를 고르는 가상 메뉴입니다.',image:''},{name:'초코 크레이프 케이크',price:7900,category:'디저트',desc:'달콤한 디저트 한 조각.',image:''}],
   commission:[{name:'캐릭터 반신 일러스트',price:50000,category:'그림',desc:'캐릭터 1인 반신 컬러 일러스트.',image:''},{name:'맞춤 메탈 키링',price:20000,category:'수공예',desc:'사진과 장식을 조합한 맞춤 키링 제작.',image:''},{name:'단편 소설 커미션',price:35000,category:'글',desc:'원하는 캐릭터와 분위기로 단편을 작성합니다.',image:''}],
-  shopping:[{name:'물 타입 매니큐어',price:5820,category:'뷰티',desc:'반짝이는 탑코트. 가상 특가 상품.',image:''},{name:'대용량 접이식 수납함',price:61650,category:'생활',desc:'옷과 소품을 정리하는 대형 수납함.',image:''},{name:'무선 미니 청소기',price:39900,category:'디지털',desc:'책상과 자동차용 무선 청소기.',image:''}]
+  shopping:[{name:'물 타입 매니큐어',price:5820,category:'쇼핑',desc:'반짝이는 탑코트. 가상 특가 상품.',image:''},{name:'대용량 접이식 수납함',price:61650,category:'쇼핑',desc:'옷과 소품을 정리하는 대형 수납함.',image:''},{name:'무선 미니 청소기',price:39900,category:'쇼핑',desc:'책상과 자동차용 무선 청소기.',image:''}],
+  steam:[{name:'Clair Obscur: Expedition 33',price:43840,category:'게임',desc:'서사 중심 턴제 RPG. 가상 할인 상품입니다.',image:''},{name:'농부는 대체되었다()',price:8800,category:'게임',desc:'자동화와 농장을 결합한 가상 게임 상품입니다.',image:''},{name:'Civilization VI: Gathering Storm',price:22500,category:'DLC',desc:'문명 VI 확장 콘텐츠. 실제 구매는 이루어지지 않습니다.',image:''},{name:'Frostpunk: On The Edge',price:1450,category:'DLC',desc:'프로스트펑크 DLC. 가상 특가 상품입니다.',image:''}]
  };saveAll()
 }
 defaults();
+if(!items.steam){
+ items.steam=[
+  {name:'Clair Obscur: Expedition 33',price:43840,category:'게임',desc:'서사 중심 턴제 RPG. 가상 할인 상품입니다.',image:''},
+  {name:'농부는 대체되었다()',price:8800,category:'게임',desc:'자동화와 농장을 결합한 가상 게임 상품입니다.',image:''},
+  {name:'Civilization VI: Gathering Storm',price:22500,category:'DLC',desc:'문명 VI 확장 콘텐츠. 실제 구매는 이루어지지 않습니다.',image:''},
+  {name:'Frostpunk: On The Edge',price:1450,category:'DLC',desc:'프로스트펑크 DLC. 가상 특가 상품입니다.',image:''}
+ ];saveAll();
+}
 const app=document.getElementById('app');
 function setMode(m){mode=m;app.className='app '+m+(editing?' editmode':'');document.getElementById('brand').textContent=modes[m].brand;document.getElementById('heroTitle').textContent=modes[m].hero;document.getElementById('heroSub').textContent=modes[m].sub;document.querySelectorAll('.nav[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));renderCategories();renderItems()}
-function renderCategories(){document.getElementById('categoryArea').innerHTML='<div class="section">카테고리</div><div class="categories">'+modes[mode].cats.map(c=>`<button class="cat" onclick="filterCat('${c[1]}')"><span>${c[0]}</span>${c[1]}</button>`).join('')+'</div>'}
-function renderItems(filter=''){const q=(document.getElementById('search').value||'').toLowerCase();const src=(items[mode]||[]).map((x,i)=>({...x,_i:i})).filter(x=>(!filter||x.category===filter)&&(!q||x.name.toLowerCase().includes(q)));const r=document.getElementById('results');r.innerHTML='<div class="sectionrow"><div class="section">'+(mode==='commission'?'숨은 맛집 리스트':mode==='shopping'?'인기 상품':'추천 메뉴')+'</div><button class="more">더보기 ›</button></div>'+(src.length?'<div class="cards">'+src.map(x=>`<article class="card"><div class="manage"><button onclick="event.stopPropagation();editItem(${x._i})">✎</button><button onclick="event.stopPropagation();removeItem(${x._i})">×</button></div><div onclick="openDetail(${x._i})"><div class="thumb" style="${x.image?`background-image:url(${x.image})`:''}">${x.image?'':'사진 추가 가능'}</div><div class="cardbody"><div class="discount">${mode==='shopping'?'가상 특가':''}</div><div class="name">${esc(x.name)}</div><div class="meta">${esc(x.category)} · 실제 판매 아님</div><div class="price">${money(x.price)}${mode==='commission'?' ~':''}</div><div class="rating">★★★★★ <span style="color:#999">(가상 후기)</span></div></div></div></article>`).join('')+'</div>':'<div class="empty">등록된 항목이 없습니다.</div>')}
+function renderCategories(){
+ const area=document.getElementById('categoryArea');
+ if(mode!=='commission'){area.innerHTML='';return}
+ area.innerHTML='<div class="section">카테고리</div><div class="categories">'+modes[mode].cats.map(c=>`<button class="cat" onclick="filterCat('${c[1]}')"><span>${c[0]}</span>${c[1]}</button>`).join('')+'</div>'
+}
+function renderItems(filter=''){const q=(document.getElementById('search').value||'').toLowerCase();const src=(items[mode]||[]).map((x,i)=>({...x,_i:i})).filter(x=>(!filter||x.category===filter)&&(!q||x.name.toLowerCase().includes(q)));const r=document.getElementById('results');r.innerHTML='<div class="sectionrow"><div class="section">'+(mode==='commission'?'커미션 목록':mode==='shopping'?'인기 상품':mode==='steam'?'할인 게임과 DLC':'추천 메뉴')+'</div><button class="more">더보기 ›</button></div>'+(src.length?'<div class="cards">'+src.map(x=>`<article class="card"><div class="manage"><button onclick="event.stopPropagation();editItem(${x._i})">✎</button><button onclick="event.stopPropagation();removeItem(${x._i})">×</button></div><div onclick="openDetail(${x._i})"><div class="thumb" style="${x.image?`background-image:url(${x.image})`:''}">${x.image?'':'사진 추가 가능'}</div><div class="cardbody"><div class="discount">${mode==='shopping'?'가상 특가':mode==='steam'?'가상 할인':''}</div><div class="name">${esc(x.name)}</div><div class="meta">${esc(x.category)} · 실제 판매 아님</div><div class="price">${money(x.price)}${mode==='commission'?' ~':''}</div><div class="rating">${mode==='steam'?'매우 긍정적':'★★★★★'} <span style="color:#999">(가상 후기)</span></div></div></div></article>`).join('')+'</div>':'<div class="empty">등록된 항목이 없습니다.</div>')}
 window.filterCat=c=>renderItems(c);document.getElementById('search').oninput=()=>renderItems();
 document.querySelectorAll('.nav[data-mode]').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
 const menuSheet=document.getElementById('menuSheet');document.getElementById('menuBtn').onclick=()=>menuSheet.classList.add('open');document.getElementById('closeMenu').onclick=()=>menuSheet.classList.remove('open');
 document.getElementById('toggleEdit').onclick=()=>{editing=!editing;app.classList.toggle('editmode',editing);document.getElementById('toggleEdit').textContent=editing?'편집모드 끝내기':'편집모드 켜기';menuSheet.classList.remove('open')};
 const formSheet=document.getElementById('formSheet');
-function fillCategories(){document.getElementById('itemCategory').innerHTML=modes[mode].cats.map(c=>`<option>${c[1]}</option>`).join('')}
+function fillCategories(){
+ const field=document.getElementById('itemCategory').closest('.field');
+ if(mode==='commission'){
+  field.classList.remove('hidden');
+  document.getElementById('itemCategory').innerHTML=modes[mode].cats.map(c=>`<option>${c[1]}</option>`).join('');
+ }else{
+  field.classList.add('hidden');
+  const label=mode==='steam'?'게임':mode==='delivery'?'배달':'쇼핑';
+  document.getElementById('itemCategory').innerHTML=`<option>${label}</option>`;
+ }
+}
 document.getElementById('addBtn').onclick=()=>{editingIndex=null;fillCategories();document.getElementById('formTitle').textContent='항목 추가';document.getElementById('itemName').value='';document.getElementById('itemPrice').value='';document.getElementById('itemDesc').value='';document.getElementById('itemImage').value='';document.getElementById('deleteItem').classList.add('hidden');formSheet.classList.add('open')};
 document.getElementById('cancelForm').onclick=()=>formSheet.classList.remove('open');
 window.editItem=i=>{editingIndex=i;fillCategories();const x=items[mode][i];document.getElementById('formTitle').textContent='항목 편집';document.getElementById('itemName').value=x.name;document.getElementById('itemPrice').value=x.price;document.getElementById('itemCategory').value=x.category;document.getElementById('itemDesc').value=x.desc||'';document.getElementById('deleteItem').classList.remove('hidden');formSheet.classList.add('open')};
 window.removeItem=i=>{if(confirm('삭제할까요?')){items[mode].splice(i,1);saveAll();renderItems()}};
 document.getElementById('deleteItem').onclick=()=>{if(editingIndex!==null&&confirm('삭제할까요?')){items[mode].splice(editingIndex,1);saveAll();formSheet.classList.remove('open');renderItems()}};
-document.getElementById('saveItem').onclick=()=>{const name=document.getElementById('itemName').value.trim(),price=+document.getElementById('itemPrice').value,category=document.getElementById('itemCategory').value,desc=document.getElementById('itemDesc').value.trim(),file=document.getElementById('itemImage').files[0];if(!name||!price)return alert('이름과 가격을 입력하세요.');const done=image=>{items[mode]=items[mode]||[];if(editingIndex===null)items[mode].unshift({name,price,category,desc,image});else items[mode][editingIndex]={name,price,category,desc,image:image||items[mode][editingIndex].image||''};saveAll();formSheet.classList.remove('open');renderItems()};if(file){const fr=new FileReader();fr.onload=()=>done(fr.result);fr.readAsDataURL(file)}else done(editingIndex===null?'':items[mode][editingIndex].image)};
+document.getElementById('saveItem').onclick=()=>{const name=document.getElementById('itemName').value.trim(),price=+document.getElementById('itemPrice').value,category=(mode==='commission'?document.getElementById('itemCategory').value:(mode==='steam'?'게임':mode==='delivery'?'배달':'쇼핑')),desc=document.getElementById('itemDesc').value.trim(),file=document.getElementById('itemImage').files[0];if(!name||!price)return alert('이름과 가격을 입력하세요.');const done=image=>{items[mode]=items[mode]||[];if(editingIndex===null)items[mode].unshift({name,price,category,desc,image});else items[mode][editingIndex]={name,price,category,desc,image:image||items[mode][editingIndex].image||''};saveAll();formSheet.classList.remove('open');renderItems()};if(file){const fr=new FileReader();fr.onload=()=>done(fr.result);fr.readAsDataURL(file)}else done(editingIndex===null?'':items[mode][editingIndex].image)};
 const detailModal=document.getElementById('detailModal');
-window.openDetail=i=>{currentItem={...items[mode][i],mode,index:i};document.getElementById('detailImage').style.backgroundImage=currentItem.image?`url(${currentItem.image})`:'';document.getElementById('detailName').textContent=currentItem.name;document.getElementById('detailPrice').textContent=money(currentItem.price)+(mode==='commission'?' ~':'');document.getElementById('detailDesc').textContent=currentItem.desc||'상세 설명이 없습니다.';document.getElementById('sellerBox').innerHTML=mode==='commission'?'<b>작가 정보</b><br><small>가상 작가 · 신청 가능</small>':'<b>상품 정보</b><br><small>가상 상품 · 실제 배송 없음</small>';document.getElementById('detailBuy').textContent=mode==='commission'?'신청하기':mode==='delivery'?'주문하기':'구매하기';detailModal.classList.add('open')};
+window.openDetail=i=>{currentItem={...items[mode][i],mode,index:i};document.getElementById('detailImage').style.backgroundImage=currentItem.image?`url(${currentItem.image})`:'';document.getElementById('detailName').textContent=currentItem.name;document.getElementById('detailPrice').textContent=money(currentItem.price)+(mode==='commission'?' ~':'');document.getElementById('detailDesc').textContent=currentItem.desc||'상세 설명이 없습니다.';document.getElementById('sellerBox').innerHTML=mode==='commission'?'<b>작가 정보</b><br><small>가상 작가 · 신청 가능</small>':mode==='steam'?'<b>게임 정보</b><br><small>가상 게임 상품 · 실제 라이브러리 등록 없음</small>':'<b>상품 정보</b><br><small>가상 상품 · 실제 배송 없음</small>';document.getElementById('detailBuy').textContent=mode==='commission'?'신청하기':mode==='delivery'?'주문하기':mode==='steam'?'장바구니에 담기':'구매하기';detailModal.classList.add('open')};
 document.getElementById('closeDetail').onclick=()=>detailModal.classList.remove('open');
 document.getElementById('backDetail').onclick=()=>detailModal.classList.remove('open');
 document.getElementById('detailWish').onclick=()=>{if(!currentItem)return;wishlist.unshift({...currentItem,added:new Date().toLocaleDateString('ko-KR')});saveAll();alert('위시리스트에 보관했습니다.')};
